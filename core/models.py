@@ -8,6 +8,9 @@ class Produto(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nome
+
 class Categoria(models.Model):
     id = models.AutoField(primary_key=True)
     nome = models.CharField('Categoria', max_length=50)
@@ -16,6 +19,9 @@ class Categoria(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nome
+
 class Marca(models.Model):
     id = models.AutoField(primary_key=True)
     nome = models.CharField('Marca', max_length=50)
@@ -23,6 +29,9 @@ class Marca(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nome
 
 class CadastrarProduto(models.Model):
     nome = models.OneToOneField(Produto, on_delete=models.CASCADE)
@@ -37,7 +46,7 @@ class CadastrarProduto(models.Model):
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.nome
+        return str(self.nome)
     
 class Cliente(models.Model):
     nome = models.CharField('Nome', max_length=50)
@@ -55,6 +64,20 @@ class Veiculo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nome
+
+class Fabricante(models.Model):
+    id = models.AutoField(primary_key=True)
+    nome = models.CharField('Fabricante', max_length=50)
+    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
+    descricao = models.TextField('Descrição', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nome
+
 class ModeloVeiculo(models.Model):
     id = models.AutoField(primary_key=True)
     nome = models.CharField('Modelo do veículo', max_length=50)
@@ -62,6 +85,9 @@ class ModeloVeiculo(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nome
 
 class Responsavel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -71,15 +97,53 @@ class Responsavel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nome
+
+class Local(models.Model):
+    id = models.AutoField(primary_key=True)
+    nome = models.CharField('Local', max_length=50)
+    cnpj = models.CharField('CNPJ', max_length=50, blank=True)
+    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
+    descricao = models.TextField('Descrição', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nome
+
 class CadastrarVeiculo(models.Model):
     id = models.AutoField(primary_key=True)
     nome_veiculo = models.OneToOneField(Veiculo, on_delete=models.CASCADE)
     modelo_veiculo = models.OneToOneField(ModeloVeiculo, on_delete=models.CASCADE)
     placa_veiculo = models.CharField('Placa do veículo', max_length=10)
     ano_veicuo = models.IntegerField('Ano do veículo')
-    fabricante_veiculo = models.CharField('Fabricante do veículo', max_length=50)
+    fabricante_veiculo = models.OneToOneField(Fabricante, on_delete=models.CASCADE)
     responsavel = models.OneToOneField(Responsavel, on_delete=models.CASCADE)
+    tipo = models.CharField('Tipo', max_length=10, default='LEVE', blank=False, null=False,
+    choices = (
+        ('LEVE','LEVE'),
+        ('MÉDIO', 'MÉDIO'),
+        ('PESADO','PESADO')
+    ))
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.nome_veiculo) + ' -- ' + str(self.placa_veiculo)
+
+class Manutencao(models.Model):
+    id = models.AutoField(primary_key=True)
+    veiculo = models.OneToOneField(CadastrarVeiculo,on_delete=models.CASCADE)
+    valor = models.DecimalField('Valor da manutenção', max_digits=100000, decimal_places=4)
+    data = models.DateField('Data da manutenção')
+    local = models.OneToOneField(Local, on_delete=models.CASCADE, verbose_name='Local da manutenção')
+    descricao = models.TextField('Descrição', blank=True)
+    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'Veículo: '+str(self.veiculo) +' - Valor: '+str(self.valor)+' - Responsável: '+str(self.responsavel)
