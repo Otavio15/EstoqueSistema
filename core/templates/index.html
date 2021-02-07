@@ -1,10 +1,16 @@
+{% load static %}
+<html lang='pt-br'/>
 <html>
     <head>
         <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
         <h1>Index</h1>
         <h2>{{curso}}</h2>
         <h2>{{curso2}}</h2>
+        <img src="{% static 'images/kurapika.png' %}" width="270" height="400"/>
     </body>
+    <button onclick="teste()">Clique-Me</button>
+    <script src="{% static 'js/script.js' %}"></script>
 </html>

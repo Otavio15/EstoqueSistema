@@ -134,12 +134,25 @@ class CadastrarVeiculo(models.Model):
     def __str__(self):
         return str(self.nome_veiculo) + ' -- ' + str(self.placa_veiculo)
 
+class TipoServico(models.Model):
+    id = models.AutoField(primary_key=True)
+    tipo_servico = models.CharField('Tipo do serviço', max_length=50)
+    valor = models.DecimalField('Valor', max_digits=100000, decimal_places=2)
+    descricao = models.TextField('Descrição', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.tipo_servico + ' - R$: '+str(self.valor)
+    
+
 class Manutencao(models.Model):
     id = models.AutoField(primary_key=True)
     veiculo = models.OneToOneField(CadastrarVeiculo,on_delete=models.CASCADE)
-    valor = models.DecimalField('Valor da manutenção', max_digits=100000, decimal_places=4)
+    valor = models.DecimalField('Valor da manutenção', max_digits=100000, decimal_places=2)
     data = models.DateField('Data da manutenção')
     local = models.OneToOneField(Local, on_delete=models.CASCADE, verbose_name='Local da manutenção')
+    tipo_servico = models.ManyToManyField(TipoServico)
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -165,8 +178,8 @@ class Abastecimento(models.Model):
     veiculo = models.OneToOneField(CadastrarVeiculo,on_delete=models.CASCADE)
     data = models.DateField('Data do abastecimento')
     posto = models.OneToOneField(Posto, on_delete=models.CASCADE)
-    valor_litro = models.DecimalField('Valor por litro', max_digits=100000, decimal_places=4)
-    valor_total = models.DecimalField('Valor total do abastecimento', max_digits=100000, decimal_places=4)
+    valor_litro = models.DecimalField('Valor por litro', max_digits=100000, decimal_places=2)
+    valor_total = models.DecimalField('Valor total do abastecimento', max_digits=100000, decimal_places=2)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -174,3 +187,11 @@ class Abastecimento(models.Model):
 
     def __str__(self):
         return str(self.veiculo) + ' -- ' + str(self.data) + ' -- ' + str(self.posto)
+
+
+class Requisicoes(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    descricao = models.TextField('Descrição', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)

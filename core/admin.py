@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CadastrarProduto, Cliente, CadastrarVeiculo, Produto, Categoria, Marca, Responsavel, ModeloVeiculo, Veiculo, Manutencao, Fabricante, Local, Abastecimento, Posto
+from .models import CadastrarProduto, Cliente, CadastrarVeiculo, Produto, Categoria, Marca, Responsavel, ModeloVeiculo, Veiculo, Manutencao, Fabricante, Local, Abastecimento, Posto, TipoServico
 
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('preco', 'quantidade')
@@ -22,4 +22,5 @@ admin.site.register(Fabricante)
 admin.site.register(Local)
 admin.site.register(Posto)
 admin.site.register(Abastecimento)
+admin.site.register(TipoServico)
 # Register your models here.
