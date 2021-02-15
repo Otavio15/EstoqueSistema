@@ -1,7 +1,6 @@
 from django.db import models
 
 class Produto(models.Model):
-    id = models.AutoField(primary_key=True)
     nome = models.CharField('Produto', max_length=50)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     descricao = models.TextField('Descrição', blank=True)
@@ -34,11 +33,11 @@ class Marca(models.Model):
         return self.nome
 
 class CadastrarProduto(models.Model):
-    nome = models.OneToOneField(Produto, on_delete=models.CASCADE)
+    nome = models.ForeignKey(Produto, on_delete=models.CASCADE)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=8)
     quantidade = models.IntegerField('Quantidade')
-    categoria = models.OneToOneField(Categoria, on_delete=models.CASCADE)
-    marca_produto = models.OneToOneField(Marca, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    marca_produto = models.ForeignKey(Marca, on_delete=models.CASCADE)
     unidade_de_medida = models.CharField('Unidade de medida', max_length=5)
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)

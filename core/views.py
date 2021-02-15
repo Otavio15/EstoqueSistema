@@ -3,9 +3,10 @@ from django.shortcuts import render
 from .models import CadastrarVeiculo
 
 def index(request):
+    veiculos = CadastrarVeiculo.objects.all()
+
     context = {
-        'curso': 'Programação Web com Django Framework',
-        'curso2': 'Django'
+        'veiculos': veiculos,
     }
     return render(request, 'index.html', context)
 
@@ -15,9 +16,18 @@ def contato(request):
 def cadastrar_veiculos(request):
     veiculos = CadastrarVeiculo.objects.all()
 
-    contexto = {
+    context = {
         'veiculos': veiculos
     }
     
-    return render(request, 'cadrastrar-veiculos.html', contexto)
+    return render(request, 'cadrastrar-veiculos.html', context)
 
+def veiculo(request, pk):
+    
+    veiculo_obj =  CadastrarVeiculo.objects.get(id = pk)
+
+    context = {
+        'veiculo': veiculo_obj
+    }
+
+    return render(request, 'veiculo.html', context)
