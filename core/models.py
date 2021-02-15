@@ -7,6 +7,10 @@ class Produto(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Produto'
+        verbose_name_plural = 'Produtos'
+
     def __str__(self):
         return self.nome
 
@@ -18,6 +22,10 @@ class Categoria(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
+
     def __str__(self):
         return self.nome
 
@@ -28,6 +36,10 @@ class Marca(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Marca'
+        verbose_name_plural = 'Marcas'
 
     def __str__(self):
         return self.nome
@@ -44,6 +56,10 @@ class CadastrarProduto(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Cadastrar produto'
+        verbose_name_plural = 'Cadastrar produtos'
+
     def __str__(self):
         return str(self.nome)
     
@@ -51,6 +67,10 @@ class Cliente(models.Model):
     nome = models.CharField('Nome', max_length=50)
     sobre_nome = models.CharField('Sobre nome', max_length=50)
     email = models.CharField('Email', max_length=70)
+
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
 
     def __str__(self):
         return self.nome
@@ -63,6 +83,10 @@ class Veiculo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Veículo'
+        verbose_name_plural = 'Veículos'
+
     def __str__(self):
         return self.nome
 
@@ -73,6 +97,10 @@ class Fabricante(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Fabricante'
+        verbose_name_plural = 'Fabricantes'
 
     def __str__(self):
         return self.nome
@@ -85,6 +113,10 @@ class ModeloVeiculo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Modelo do veículo'
+        verbose_name_plural = 'Modelos dos veículos'
+
     def __str__(self):
         return self.nome
 
@@ -95,6 +127,10 @@ class Responsavel(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Responsável'
+        verbose_name_plural = 'Responsáveis'
 
     def __str__(self):
         return self.nome
@@ -107,6 +143,10 @@ class Local(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Local'
+        verbose_name_plural = 'Locais'
 
     def __str__(self):
         return self.nome
@@ -130,6 +170,10 @@ class CadastrarVeiculo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Cadastrar veículo'
+        verbose_name_plural = 'Cadastrar veículos'
+
     def __str__(self):
         return str(self.nome_veiculo) + ' -- ' + str(self.placa_veiculo)
 
@@ -140,6 +184,10 @@ class TipoServico(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Tipo de serviço'
+        verbose_name_plural = 'Tipos de serviços'
 
     def __str__(self):
         return self.tipo_servico + ' - R$: '+str(self.valor)
@@ -157,6 +205,10 @@ class Manutencao(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Manutenção'
+        verbose_name_plural = 'Manutenções'
+
     def __str__(self):
         return 'Veículo: '+str(self.veiculo) +' - Valor: '+str(self.valor)+' - Local: '+str(self.local)
 
@@ -168,6 +220,10 @@ class Posto(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Posto'
+        verbose_name_plural = 'Postos'
 
     def __str__(self):
         return self.nome
@@ -184,13 +240,20 @@ class Abastecimento(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Abastecimento'
+        verbose_name_plural = 'Abastecimentos'
+
     def __str__(self):
         return str(self.veiculo) + ' -- ' + str(self.data) + ' -- ' + str(self.posto)
 
 
 class Requisicoes(models.Model):
     id = models.AutoField(primary_key=True)
-
     descricao = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Requisição'
+        verbose_name_plural = 'Requisições'

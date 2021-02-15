@@ -25,3 +25,6 @@ urlpatterns = [
     path('cadastrar-veiculos', cadastrar_veiculos),
     path('/<int:pk>', veiculo, name='veiculo')
 ]
+
+admin.site.site_header = 'Nippontec'
+admin.site.site_title = 'Nippontec'
