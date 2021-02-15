@@ -1,6 +1,6 @@
 # admin.py (ForeignKey)
 from django.contrib import admin
-from .models import CadastrarProduto, Cliente, CadastrarVeiculo, Produto, Categoria, Marca, Responsavel, ModeloVeiculo, Veiculo, Manutencao, Fabricante, Local, Abastecimento, Posto, TipoServico
+from .models import CadastrarProduto, Cliente, CadastrarVeiculo, Produto, Categoria, Marca, Responsavel, ModeloVeiculo, Veiculo, Manutencao, Fabricante, Local, Abastecimento, Posto, TipoServico, UnidadeMedida
 
 class ProdutoInline(admin.TabularInline):
     model = CadastrarProduto
@@ -28,4 +28,5 @@ admin.site.register(Local)
 admin.site.register(Posto)
 admin.site.register(Abastecimento)
 admin.site.register(TipoServico)
+admin.site.register(UnidadeMedida)
 # Register your models here.

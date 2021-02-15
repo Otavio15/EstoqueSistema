@@ -44,13 +44,26 @@ class Marca(models.Model):
     def __str__(self):
         return self.nome
 
+class UnidadeMedida(models.Model):
+    id = models.AutoField(primary_key=True)
+    unidade_medida = models.CharField('Unidade de medida', max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Unidade de medida'
+        verbose_name_plural = 'Unidade de medida'
+
+    def __str__(self):
+        return self.unidade_medida
+
 class CadastrarProduto(models.Model):
     nome = models.ForeignKey(Produto, on_delete=models.CASCADE)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=8)
     quantidade = models.IntegerField('Quantidade')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     marca_produto = models.ForeignKey(Marca, on_delete=models.CASCADE)
-    unidade_de_medida = models.CharField('Unidade de medida', max_length=5)
+    unidade_de_medida = models.ForeignKey(UnidadeMedida, on_delete=models.CASCADE)
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
