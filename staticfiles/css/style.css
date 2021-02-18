@@ -3,3 +3,7 @@ body{
     background-color: purple;
     color: white;
 }
+
+tr{
+    margin: 30px;
+}
