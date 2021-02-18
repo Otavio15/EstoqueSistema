@@ -58,12 +58,12 @@ class UnidadeMedida(models.Model):
         return self.unidade_medida
 
 class CadastrarProduto(models.Model):
-    nome = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    nome = models.ForeignKey(Produto, on_delete=models.PROTECT)
     preco = models.DecimalField('Preço', decimal_places=2, max_digits=8)
     quantidade = models.IntegerField('Quantidade')
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    marca_produto = models.ForeignKey(Marca, on_delete=models.CASCADE)
-    unidade_de_medida = models.ForeignKey(UnidadeMedida, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
+    marca_produto = models.ForeignKey(Marca, on_delete=models.PROTECT)
+    unidade_de_medida = models.ForeignKey(UnidadeMedida, on_delete=models.PROTECT)
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -166,12 +166,12 @@ class Local(models.Model):
 
 class CadastrarVeiculo(models.Model):
     id = models.AutoField(primary_key=True)
-    nome_veiculo = models.OneToOneField(Veiculo, on_delete=models.CASCADE)
-    modelo_veiculo = models.OneToOneField(ModeloVeiculo, on_delete=models.CASCADE)
+    nome_veiculo = models.ForeignKey(Veiculo, on_delete=models.PROTECT)
+    modelo_veiculo = models.ForeignKey(ModeloVeiculo, on_delete=models.PROTECT)
     placa_veiculo = models.CharField('Placa do veículo', max_length=10)
     ano_veicuo = models.IntegerField('Ano do veículo')
-    fabricante_veiculo = models.OneToOneField(Fabricante, on_delete=models.CASCADE)
-    responsavel = models.OneToOneField(Responsavel, on_delete=models.CASCADE)
+    fabricante_veiculo = models.ForeignKey(Fabricante, on_delete=models.PROTECT)
+    responsavel = models.ForeignKey(Responsavel, on_delete=models.PROTECT, blank=True)
     tipo = models.CharField('Tipo', max_length=10, default='LEVE', blank=False, null=False,
     choices = (
         ('LEVE','LEVE'),
@@ -193,10 +193,10 @@ class CadastrarVeiculo(models.Model):
 
 class Manutencao(models.Model):
     id = models.AutoField(primary_key=True)
-    veiculo = models.OneToOneField(CadastrarVeiculo,on_delete=models.PROTECT)
+    veiculo = models.ForeignKey(CadastrarVeiculo,on_delete=models.PROTECT)
     valor = models.DecimalField('Valor da manutenção', max_digits=100000, decimal_places=2)
     data = models.DateField('Data da manutenção')
-    local = models.OneToOneField(Local, on_delete=models.PROTECT, verbose_name='Local da manutenção')
+    local = models.ForeignKey(Local, on_delete=models.PROTECT, verbose_name='Local da manutenção')
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -207,7 +207,7 @@ class Manutencao(models.Model):
         verbose_name_plural = 'Manutenções'
 
     def __str__(self):
-        return 'Veículo: '+str(self.veiculo) +' - Valor: '+str(self.valor)+' - Local: '+str(self.local)
+        return 'Veículo: '+str(self.veiculo)
 
 class TipoServico(models.Model):
     tipo_servico = models.CharField('Serviço', max_length=50)
@@ -240,9 +240,9 @@ class Posto(models.Model):
 
 class Abastecimento(models.Model):
     id = models.AutoField(primary_key=True)
-    veiculo = models.OneToOneField(CadastrarVeiculo,on_delete=models.CASCADE)
+    veiculo = models.ForeignKey(CadastrarVeiculo,on_delete=models.PROTECT)
     data = models.DateField('Data do abastecimento')
-    posto = models.OneToOneField(Posto, on_delete=models.CASCADE)
+    posto = models.ForeignKey(Posto, on_delete=models.PROTECT)
     valor_litro = models.DecimalField('Valor por litro', max_digits=100000, decimal_places=2)
     valor_total = models.DecimalField('Valor total do abastecimento', max_digits=100000, decimal_places=2)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
@@ -255,7 +255,7 @@ class Abastecimento(models.Model):
         verbose_name_plural = 'Abastecimentos'
 
     def __str__(self):
-        return str(self.veiculo) + ' -- ' + str(self.data) + ' -- ' + str(self.posto)
+        return str(self.veiculo)
 
 
 class Requisicoes(models.Model):
@@ -267,3 +267,6 @@ class Requisicoes(models.Model):
     class Meta:
         verbose_name = 'Requisição'
         verbose_name_plural = 'Requisições'
+
+    def __str__(self):
+        return str(self.descricao)
