@@ -188,7 +188,7 @@ class CadastrarVeiculo(models.Model):
         verbose_name_plural = 'Cadastrar veículos'
 
     def __str__(self):
-        return str(self.nome_veiculo) + ' -- ' + str(self.placa_veiculo)
+        return str(self.nome_veiculo) + ' <  > ' + str(self.placa_veiculo)
     
 
 class Manutencao(models.Model):
