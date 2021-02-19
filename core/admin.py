@@ -8,45 +8,59 @@ class TipoServicoInline(admin.TabularInline):
 
 class ManutencaoAdmin(admin.ModelAdmin):
     list_display = ('veiculo', 'valor', 'data', 'local')
+    search_fields = ['veiculo']
     inlines = [TipoServicoInline]
 
 class CadastrarVeiculoAdmin(admin.ModelAdmin):
-    list_display = ('modelo_veiculo', 'placa_veiculo', 'ano_veicuo')
+    search_fields = ['placa_veiculo']
+    list_display = ('placa_veiculo', 'modelo_veiculo', 'ano_veicuo')
 
 class CadastrarProdutoAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'preco', 'quantidade', 'categoria', 'marca_produto')
 
 class ProdutoAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class CategoriaAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class MarcaAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class ResponsavelAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class ModeloVeiculoAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class VeiculoAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class TipoServicoAdmin(admin.ModelAdmin):
+    search_fields = ['tipo_servico']
     list_display = ('tipo_servico', 'valor')
 
 class FabricanteAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class LocalAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'cnpj', 'descricao')
 
 class PostoAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
     list_display = ('nome', 'descricao')
 
 class AbastecimentoAdmin(admin.ModelAdmin):
+    search_fields = ['veiculo']
     list_display = ('veiculo', 'data', 'posto', 'valor_total')
 
 
