@@ -1,4 +1,7 @@
 from django.db import models
+from tinymce import HTMLField
+
+##### Cadastrar Produto #####
 
 class Produto(models.Model):
     nome = models.CharField('Produto', max_length=50)
@@ -63,7 +66,7 @@ class CadastrarProduto(models.Model):
     quantidade = models.IntegerField('Quantidade')
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
     marca_produto = models.ForeignKey(Marca, on_delete=models.PROTECT)
-    unidade_de_medida = models.ForeignKey(UnidadeMedida, on_delete=models.PROTECT)
+    unidade_de_medida = models.ForeignKey(UnidadeMedida, on_delete=models.CASCADE)
     descricao = models.TextField('Descrição', blank=True)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -75,18 +78,10 @@ class CadastrarProduto(models.Model):
 
     def __str__(self):
         return str(self.nome)
-    
-class Cliente(models.Model):
-    nome = models.CharField('Nome', max_length=50)
-    sobre_nome = models.CharField('Sobre nome', max_length=50)
-    email = models.CharField('Email', max_length=70)
 
-    class Meta:
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
+##### fim cadastrar Produto #####
 
-    def __str__(self):
-        return self.nome
+##### Cadastrar veículo #####
 
 class Veiculo(models.Model):
     id = models.AutoField(primary_key=True)
@@ -99,21 +94,6 @@ class Veiculo(models.Model):
     class Meta:
         verbose_name = 'Veículo'
         verbose_name_plural = 'Veículos'
-
-    def __str__(self):
-        return self.nome
-
-class Fabricante(models.Model):
-    id = models.AutoField(primary_key=True)
-    nome = models.CharField('Fabricante', max_length=50)
-    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
-    descricao = models.TextField('Descrição', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Fabricante'
-        verbose_name_plural = 'Fabricantes'
 
     def __str__(self):
         return self.nome
@@ -133,6 +113,21 @@ class ModeloVeiculo(models.Model):
     def __str__(self):
         return self.nome
 
+class Fabricante(models.Model):
+    id = models.AutoField(primary_key=True)
+    nome = models.CharField('Fabricante', max_length=50)
+    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
+    descricao = models.TextField('Descrição', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Fabricante'
+        verbose_name_plural = 'Fabricantes'
+
+    def __str__(self):
+        return self.nome
+
 class Responsavel(models.Model):
     id = models.AutoField(primary_key=True)
     nome = models.CharField('Responsável', max_length=50)
@@ -144,22 +139,6 @@ class Responsavel(models.Model):
     class Meta:
         verbose_name = 'Responsável'
         verbose_name_plural = 'Responsáveis'
-
-    def __str__(self):
-        return self.nome
-
-class Local(models.Model):
-    id = models.AutoField(primary_key=True)
-    nome = models.CharField('Local', max_length=50)
-    cnpj = models.CharField('CNPJ', max_length=50, blank=True)
-    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
-    descricao = models.TextField('Descrição', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Local'
-        verbose_name_plural = 'Locais'
 
     def __str__(self):
         return self.nome
@@ -189,6 +168,26 @@ class CadastrarVeiculo(models.Model):
 
     def __str__(self):
         return str(self.nome_veiculo) + ' <  > ' + str(self.placa_veiculo)
+
+##### fim cadastrar veículo #####
+
+##### Cadastrar Manutencao #####
+
+class Local(models.Model):
+    id = models.AutoField(primary_key=True)
+    nome = models.CharField('Local', max_length=50)
+    cnpj = models.CharField('CNPJ', max_length=50, blank=True)
+    imagem = models.ImageField('Imagem',upload_to='img', blank=True)
+    descricao = models.TextField('Descrição', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Local'
+        verbose_name_plural = 'Locais'
+
+    def __str__(self):
+        return self.nome
     
 
 class Manutencao(models.Model):
@@ -222,6 +221,10 @@ class TipoServico(models.Model):
 
     def __str__(self):
         return self.tipo_servico + ' - R$: '+str(self.valor)
+
+##### Fim cadastrar manutenções #####
+
+##### Cadastrar Posto #####
 
 class Posto(models.Model):
     id = models.AutoField(primary_key=True)
@@ -257,10 +260,15 @@ class Abastecimento(models.Model):
     def __str__(self):
         return str(self.veiculo)
 
+##### Fim cadastrar posto #####
 
 class Requisicoes(models.Model):
     id = models.AutoField(primary_key=True)
-    descricao = models.TextField('Descrição', blank=True)
+    titulo = models.CharField('Título da requisição', max_length=50)
+    data = models.DateField('Data da requisição')
+    veiculo = models.ForeignKey(Veiculo, on_delete=models.PROTECT)
+    local = models.ForeignKey(Local, on_delete=models.PROTECT, verbose_name='Local do abastecimento')
+    requisicao = HTMLField('Requisição')
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -269,4 +277,4 @@ class Requisicoes(models.Model):
         verbose_name_plural = 'Requisições'
 
     def __str__(self):
-        return str(self.descricao)
+        return str(self.titulo)
