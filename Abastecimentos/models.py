@@ -24,7 +24,7 @@ class Abastecimento(models.Model):
     veiculo = models.ForeignKey(CadastrarVeiculo,on_delete=models.PROTECT)
     data = models.DateField('Data do abastecimento')
     posto = models.ForeignKey(Posto, on_delete=models.PROTECT)
-    valor_litro = models.DecimalField('Valor por litro', max_digits=100000, decimal_places=2)
+    valor_litro = models.DecimalField('Valor por litro', max_digits=10, decimal_places=2)
     valor_total = models.DecimalField('Valor total do abastecimento', max_digits=100000, decimal_places=2)
     imagem = models.ImageField('Imagem',upload_to='img', blank=True)
     descricao = models.TextField('Descrição', blank=True)

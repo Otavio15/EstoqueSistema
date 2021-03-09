@@ -25,7 +25,7 @@ class Local(models.Model):
 class Manutencao(models.Model):
     id = models.AutoField(primary_key=True)
     veiculo = models.ForeignKey(CadastrarVeiculo,on_delete=models.PROTECT)
-    valor = models.DecimalField('Valor da manutenção', max_digits=100000, decimal_places=2)
+    valor = models.DecimalField('Valor da manutenção', max_digits=10, decimal_places=2)
     data = models.DateField('Data da manutenção')
     local = models.ForeignKey(Local, on_delete=models.PROTECT, verbose_name='Local da manutenção')
     descricao = models.TextField('Descrição', blank=True)
@@ -42,7 +42,7 @@ class Manutencao(models.Model):
 
 class TipoServico(models.Model):
     tipo_servico = models.CharField('Serviço', max_length=50)
-    valor = models.DecimalField('Valor do serviço', max_digits=100000, decimal_places=2)
+    valor = models.DecimalField('Valor do serviço', max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     manutencao = models.ForeignKey(Manutencao, on_delete=models.PROTECT)
