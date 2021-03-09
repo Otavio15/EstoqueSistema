@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'estoque',
         'USER': 'pi',
         'PASSWORD': 'su2141po',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.202.132',
         'PORT': '3306'
     }
 }
