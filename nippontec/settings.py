@@ -84,12 +84,8 @@ WSGI_APPLICATION = 'nippontec.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'estoque',
-        'USER': 'pi',
-        'PASSWORD': 'su2141po',
-        'HOST': '192.168.202.132',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
