@@ -6,4 +6,4 @@ def vizualisar_manutencoes(request):
     return render(request, 'vizualisar-manutencoes.html')
 
 def cadastrar_manutencoes(request):
-    return render(render, 'cadastrar-manutencoes.html')
+    return render(request, 'cadastrar-manutencao.html')

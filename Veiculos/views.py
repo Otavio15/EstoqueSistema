@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def vizualisar_veiculos(request):
     return render(request, 'vizualisar-veiculos.html')
+
+def cadastrar_veiculo(request):
+    return render(request, 'cadastrar-veiculo.html')
