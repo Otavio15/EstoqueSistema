@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def vizualisar_abastecimentos(request):
+    return render(request, 'vizualisar-abastecimentos.html')
