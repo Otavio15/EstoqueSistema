@@ -67,7 +67,7 @@ input {
   }
 
   .btn:hover{
-    background-color: #34019a;
+    background-color: #003d61;
     border-radius: 10px;
     transition: 0.5s;
     cursor: pointer;
