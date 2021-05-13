@@ -1,5 +1,5 @@
 body {
-    background-image: url('wallpaper.png');
+    background-image: url('/static/img/wallpaper.png');
     background-attachment: fixed;
     background-position: center;
     margin-top: 5%;

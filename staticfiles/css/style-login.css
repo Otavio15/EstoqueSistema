@@ -1,11 +1,11 @@
 body {
-    background-image: url('wallpaper.png');
+    background-image: url('/static/img/wallpaper.png');
     background-attachment: fixed;
     background-position: center;
     margin-top: 5%;
 }
 section{
-    height: 400px;
+    height: 470px;
     width: 400px;
     border: 1px solid white;
     background-image: linear-gradient(45deg, rgb(97 215 245), rgb(3 191 220));
@@ -23,11 +23,11 @@ IMG.displayed {
 }
 
 body section form{
-    margin-top: 10%;
+    margin-top: 5%;
     align-items: center;
 }
 
-body section form div, body section form button, h4{
+body section form div, body section form button, h5{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -35,7 +35,7 @@ body section form div, body section form button, h4{
     margin-top: 5px;
 }
 
-h4{
+h5{
     margin-top: 5%;
     font-family: 'Courier New', Courier, monospace;
     color: white;
@@ -63,18 +63,12 @@ input {
     color: white;
     border-radius: 5px;
     transition: 0.5s;
+    margin-bottom: 20px;
   }
 
   .btn:hover{
-    background-color: #34019a;
+    background-color: #003d61;
     border-radius: 10px;
     transition: 0.5s;
     cursor: pointer;
-  }
-
-  .alert alert-danger{
-    margin-top: 5%;
-    font-family: 'Courier New', Courier, monospace;
-    color: white;
-    background-color: rgb(182, 0, 0);
   }
