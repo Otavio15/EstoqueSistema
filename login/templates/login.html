@@ -1,0 +1,31 @@
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nippontec Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="{% static "css/style-login.css" %}" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <IMG class="displayed" src="{% static "img/logo.png" %}" alt="Logotipo nippontec">
+
+        <h5>Informe os dados de acesso</h5>
+        <form class="form-signin" action="submit" method="POST">{% csrf_token %}
+            <div class="form-group">
+                <input type="user" class="form-control" id="user" name="user" aria-describedby="emailHelp" placeholder="Usuário ou e-mail">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+            </div>
+            </p>
+            <button class="btn btn-outline-dark btn-block text-uppercase" type="submit">Entrar</button>
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                <strong>Error! </strong>{{ message }}
+                </div>
+            {% endfor %}
+        </form>
+    </section>
+</body>
+</html>

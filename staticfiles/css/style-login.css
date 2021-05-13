@@ -1,0 +1,80 @@
+body {
+    background-image: url('wallpaper.png');
+    background-attachment: fixed;
+    background-position: center;
+    margin-top: 5%;
+}
+section{
+    height: 400px;
+    width: 400px;
+    border: 1px solid white;
+    background-image: linear-gradient(45deg, rgb(97 215 245), rgb(3 191 220));
+    box-shadow: 2px 3px 4px black;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 220px;
+    margin-top: 5%;
+}
+
+body section form{
+    margin-top: 10%;
+    align-items: center;
+}
+
+body section form div, body section form button, h4{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 220px;
+    margin-top: 5px;
+}
+
+h4{
+    margin-top: 5%;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+body section form button{
+    margin-top: 5%;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 10px;
+  border-radius: 4px;
+}
+
+.btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13;
+    width: 165px;
+    height: 35px;
+    background-color: #006098;
+    padding: 9px 50px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    transition: 0.5s;
+  }
+
+  .btn:hover{
+    background-color: #34019a;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  .alert alert-danger{
+    margin-top: 5%;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    background-color: rgb(182, 0, 0);
+  }
